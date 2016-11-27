@@ -2,33 +2,50 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    bundle: './index.js',
-    vendor: [ 'react', 'react-dom' ],
+    bundle: ['./index.js'],
+    vendor: ['react', 'react-dom'],
   },
   output: {
-    filename: '[name].js?[hash]',
+    filename: '[name].[hash].js',
     path: 'dist',
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+      },
+    ],
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        loader: 'style!css?modules=true'
-      }
+        test: /\.scss$/,
+        loaders: [
+          'style-loader',
+          `css-loader?${JSON.stringify({
+            modules: true,
+            sourceMap: true,
+            localIdentName: '[name]__[local]__[hash:base64:5]',
+          })}`,
+          'sass-loader?sourceMap',
+        ],
+      },
     ],
   },
   devtool: 'sourcemap',
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      names: ['vendor'],
       minChunks: Infinity,
-      filename: '[name].js?[hash]',
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(true),
+    new webpack.optimize.OccurrenceOrderPlugin(),
   ],
+  resolve: {
+    extensions: ['', '.js', '.scss'],
+  },
 };
