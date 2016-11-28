@@ -1,0 +1,50 @@
+.base {
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+
+  &::before {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    transition: opacity 150ms ease;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  &,
+  &::before {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.panel {
+  background-color: #fff;
+  width: 90%;
+  max-width: 350px;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  will-change: transform;
+  transform: translateX(-102%);
+  transition: transform 250ms ease;
+}
+
+/*
+ * States
+ * ========================================== */
+
+.base.active {
+  pointer-events: auto;
+
+  .panel {
+    transform: none;
+  }
+
+  &::before {
+    opacity: 1;
+  }
+}
