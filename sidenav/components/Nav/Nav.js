@@ -10,25 +10,23 @@ class Nav extends Component {
     this.onOutsideClick = this.onOutsideClick.bind(this);
   }
 
-  onOutsideClick({ target }) {
-    const { active, toggle } = this.props;
-    if (!active || target !== this.navEl) {
+  onOutsideClick(event) {
+    if (!this.props.active || event.target !== this.navEl) {
       return;
     }
-    toggle();
+    this.props.toggle();
   }
 
   render() {
-    const { active, toggle } = this.props;
     const classes = classnames({
       [styles.base]: true,
-      [styles.active]: active,
+      [styles.active]: this.props.active,
     });
 
     return (
       <div className={classes} ref={(node) => this.navEl = node} onClick={this.onOutsideClick}>
         <nav className={styles.panel}>
-          <Button icon='close' onClick={toggle} />
+          <Button icon='close' onClick={this.props.toggle} />
         </nav>
       </div>
     );
