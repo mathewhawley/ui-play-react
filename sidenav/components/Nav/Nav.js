@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
+import times from 'lodash/times';
 import Button from '../Button';
 import styles from './Nav.scss';
 
@@ -38,7 +39,15 @@ class Nav extends Component {
               customStyles={styles.close}
             />
           </header>
-          <nav className={styles.body}></nav>
+          <nav className={styles.body}>
+            <ul>
+              {times(6, (index) =>
+                <li key={index}>
+                  <a href='#'>Euismod Ornare Elit</a>
+                </li>
+              )}
+            </ul>
+          </nav>
         </aside>
       </div>
     );

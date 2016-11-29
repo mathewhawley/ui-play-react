@@ -26,7 +26,46 @@ exports[`<Root /> renders correctly 1`] = `
         </button>
       </header>
       <nav
-        className="body" />
+        className="body">
+        <ul>
+          <li>
+            <a
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+        </ul>
+      </nav>
     </aside>
   </div>
 </div>

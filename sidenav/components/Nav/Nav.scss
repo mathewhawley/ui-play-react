@@ -33,6 +33,7 @@
   will-change: transform;
   transform: translateX(-102%);
   transition: transform 250ms ease;
+  color: $dark-grey;
 }
 
 .header {
