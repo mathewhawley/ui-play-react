@@ -39,7 +39,6 @@ describe('<Nav />', () => {
   });
 
   it('should not call click handler when panel clicked', () => {
-    const wrapper = mount(<Nav active={true} toggle={clickHandler} />);
     const target = wrapper.find('nav');
     wrapper.simulate('click', { target });
     expect(clickHandler).not.toHaveBeenCalled();

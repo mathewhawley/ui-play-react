@@ -24,7 +24,11 @@ class Nav extends Component {
     });
 
     return (
-      <div className={classes} ref={(node) => this.navEl = node} onClick={this.onOutsideClick}>
+      <div
+        className={classes}
+        ref={(node) => this.navEl = node}
+        onClick={this.onOutsideClick}
+      >
         <nav className={styles.panel}>
           <Button icon='close' onClick={this.props.toggle} />
         </nav>
