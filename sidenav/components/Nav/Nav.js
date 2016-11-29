@@ -43,7 +43,7 @@ class Nav extends Component {
             <ul>
               {times(6, (index) =>
                 <li key={index}>
-                  <a href='#'>Euismod Ornare Elit</a>
+                  <a className={styles.link} href='#'>Euismod Ornare Elit</a>
                 </li>
               )}
             </ul>

@@ -30,36 +30,42 @@ exports[`<Root /> renders correctly 1`] = `
         <ul>
           <li>
             <a
+              className="link"
               href="#">
               Euismod Ornare Elit
             </a>
           </li>
           <li>
             <a
+              className="link"
               href="#">
               Euismod Ornare Elit
             </a>
           </li>
           <li>
             <a
+              className="link"
               href="#">
               Euismod Ornare Elit
             </a>
           </li>
           <li>
             <a
+              className="link"
               href="#">
               Euismod Ornare Elit
             </a>
           </li>
           <li>
             <a
+              className="link"
               href="#">
               Euismod Ornare Elit
             </a>
           </li>
           <li>
             <a
+              className="link"
               href="#">
               Euismod Ornare Elit
             </a>

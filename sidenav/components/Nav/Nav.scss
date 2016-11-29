@@ -59,6 +59,16 @@
   overflow-y: auto;
 }
 
+.link {
+  display: block;
+  padding: $global-padding;
+  border-bottom: 1px solid $mid-grey;
+
+  &:hover {
+    background-color: $mid-grey;
+  }
+}
+
 .close {
   color: $white;
   align-self: flex-start;
