@@ -21,10 +21,10 @@ Run a __project__ by specifying it's name as an argument:
 $ yarn start <project name>
 ```
 
-## Exercises
+## Projects
 
 Below are a list of projects that can be run via the `yarn start ...` command:
 
 ```
-sidenav
+– sidenav
 ```
