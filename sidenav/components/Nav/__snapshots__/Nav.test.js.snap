@@ -1,7 +1,7 @@
 exports[`<Nav /> renders correctly 1`] = `
 <div
   className="base"
-  onClick={[Function]}>
+  onTouchEnd={[Function]}>
   <aside
     className="panel">
     <header

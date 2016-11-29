@@ -10,7 +10,7 @@ exports[`<Root /> renders correctly 1`] = `
   </div>
   <div
     className="base"
-    onClick={[Function]}>
+    onTouchEnd={[Function]}>
     <aside
       className="panel">
       <header

@@ -8,35 +8,35 @@ import Button from '../Button';
 
 describe('<Nav />', () => {
   let wrapper;
-  let clickHandler;
+  let spy;
 
   beforeEach(() => {
-    clickHandler = jest.fn();
-    wrapper = shallow(<Nav active={false} toggle={clickHandler} />);
+    spy = jest.fn();
+    wrapper = shallow(<Nav active={false} toggle={spy} />);
   });
 
   it('renders correctly', () => {
     const tree = renderer.create(
-      <Nav active={false} toggle={clickHandler} />
+      <Nav active={false} toggle={spy} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('should call click handler when close button clicked', () => {
     wrapper.find(Button).simulate('click');
-    expect(clickHandler).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
-  it('should call click handler when click event is outside the panel', () => {
-    const wrapper = mount(<Nav active={true} toggle={clickHandler} />);
+  it('should call handler on `touchend` event outside the panel', () => {
+    const wrapper = mount(<Nav active={true} toggle={spy} />);
     const target = wrapper.instance().navEl;
-    wrapper.simulate('click', { target });
-    expect(clickHandler).toHaveBeenCalled();
+    wrapper.simulate('touchend', { target });
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should not call click handler when panel clicked', () => {
     const target = wrapper.find('nav');
     wrapper.simulate('click', { target });
-    expect(clickHandler).not.toHaveBeenCalled();
+    expect(spy).not.toHaveBeenCalled();
   });
 });

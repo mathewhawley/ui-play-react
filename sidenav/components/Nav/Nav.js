@@ -28,7 +28,7 @@ class Nav extends Component {
       <div
         className={classes}
         ref={(node) => this.navEl = node}
-        onClick={this.onOutsideClick}
+        onTouchEnd={this.onOutsideClick}
       >
         <aside className={styles.panel}>
           <header className={styles.header}>

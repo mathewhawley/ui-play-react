@@ -8,22 +8,22 @@ import Button from '../Button';
 
 describe('<Header />', () => {
   let wrapper;
-  let clickHandler;
+  let spy;
 
   beforeEach(() => {
-    clickHandler = jest.fn();
-    wrapper = shallow(<Header toggleNav={clickHandler} />);
+    spy = jest.fn();
+    wrapper = shallow(<Header toggleNav={spy} />);
   });
 
   it('renders correctly', () => {
     const tree = renderer.create(
-      <Header toggleNav={clickHandler} />
+      <Header toggleNav={spy} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('should call click handler on click', () => {
     wrapper.find(Button).simulate('click');
-    expect(clickHandler).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 });
