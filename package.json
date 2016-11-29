@@ -50,6 +50,7 @@
   },
   "pre-commit": [
     "pre-commit-msg",
+    "lint",
     "test"
   ],
   "jest": {
