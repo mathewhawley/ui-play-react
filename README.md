@@ -18,7 +18,7 @@ $ yarn
 Run a __project__ by specifying it's name as an argument:
 
 ```
-yarn start <project name>
+$ yarn start <project name>
 ```
 
 ## Exercises
