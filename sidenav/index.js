@@ -7,7 +7,4 @@ import { render } from 'react-dom';
 import Root from './components/Root';
 import './styles/main.scss';
 
-render(
-  <Root />,
-  document.getElementById('__root__')
-);
+render(<Root />, document.getElementById('__root__'));

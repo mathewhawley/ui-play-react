@@ -1,0 +1,14 @@
+exports[`<Nav /> renders correctly 1`] = `
+<div
+  className="base"
+  onClick={[Function]}>
+  <nav
+    className="panel">
+    <button
+      className="base material-icons"
+      onClick={[Function]}>
+      close
+    </button>
+  </nav>
+</div>
+`;

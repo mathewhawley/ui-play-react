@@ -27,6 +27,7 @@
     "ora": "^0.3.0",
     "pre-commit": "^1.1.3",
     "react-addons-test-utils": "^15.4.1",
+    "react-test-renderer": "^15.4.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
@@ -44,11 +45,12 @@
     "lint": "eslint . --cache",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:cover": "jest --coverage",
     "pre-commit-msg": "echo 'Performing pre-commit checks...' && exit 0"
   },
   "pre-commit": [
     "pre-commit-msg",
-    "lint"
+    "test"
   ],
   "jest": {
     "moduleNameMapper": {

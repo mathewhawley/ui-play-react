@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 import Root from './Root';
 
 describe('<Root />', () => {
@@ -13,6 +14,11 @@ describe('<Root />', () => {
 
   it('should exist', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it('renders correctly', () => {
+    const tree = renderer.create(<Root />).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   it('should toggle active state when handler is called', () => {

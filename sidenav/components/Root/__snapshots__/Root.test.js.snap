@@ -1,0 +1,24 @@
+exports[`<Root /> renders correctly 1`] = `
+<div>
+  <div
+    className="base">
+    <button
+      className="base button material-icons"
+      onClick={[Function]}>
+      menu
+    </button>
+  </div>
+  <div
+    className="base"
+    onClick={[Function]}>
+    <nav
+      className="panel">
+      <button
+        className="base material-icons"
+        onClick={[Function]}>
+        close
+      </button>
+    </nav>
+  </div>
+</div>
+`;

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import renderer from 'react-test-renderer';
 import Nav from './Nav';
 import Button from '../Button';
 
@@ -16,6 +17,13 @@ describe('<Nav />', () => {
 
   it('should exist', () => {
     expect(wrapper).toBeDefined();
+  });
+
+  it('renders correctly', () => {
+    const tree = renderer.create(
+      <Nav active={false} toggle={clickHandler} />
+    ).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   it('should call click handler when close button clicked', () => {
