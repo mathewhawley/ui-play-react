@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .base {
   overflow: hidden;
   pointer-events: none;
@@ -22,7 +24,7 @@
 }
 
 .panel {
-  background-color: #fff;
+  background-color: $white;
   width: 90%;
   max-width: 350px;
   height: 100%;
@@ -31,6 +33,37 @@
   will-change: transform;
   transform: translateX(-102%);
   transition: transform 250ms ease;
+}
+
+.header {
+  height: 20vh;
+  max-height: 200px;
+  min-height: 150px;
+  background-color: $dark-grey;
+  padding: $global-padding;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.body {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.close {
+  color: $white;
+  align-self: flex-start;
+  margin-top: #{($global-padding - 6) * -1};
+  margin-left: #{($global-padding - 6) * -1};
+  order: -1;
 }
 
 /*

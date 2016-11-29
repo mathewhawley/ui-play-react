@@ -12,10 +12,6 @@ describe('<Root />', () => {
     wrapper = shallow(<Root />);
   });
 
-  it('should exist', () => {
-    expect(wrapper).toBeDefined();
-  });
-
   it('renders correctly', () => {
     const tree = renderer.create(<Root />).toJSON();
     expect(tree).toMatchSnapshot();

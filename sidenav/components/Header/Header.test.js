@@ -15,10 +15,6 @@ describe('<Header />', () => {
     wrapper = shallow(<Header toggleNav={clickHandler} />);
   });
 
-  it('should exist', () => {
-    expect(wrapper).toBeDefined();
-  });
-
   it('renders correctly', () => {
     const tree = renderer.create(
       <Header toggleNav={clickHandler} />

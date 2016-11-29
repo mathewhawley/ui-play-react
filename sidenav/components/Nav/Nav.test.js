@@ -15,10 +15,6 @@ describe('<Nav />', () => {
     wrapper = shallow(<Nav active={false} toggle={clickHandler} />);
   });
 
-  it('should exist', () => {
-    expect(wrapper).toBeDefined();
-  });
-
   it('renders correctly', () => {
     const tree = renderer.create(
       <Nav active={false} toggle={clickHandler} />

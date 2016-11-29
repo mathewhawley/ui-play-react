@@ -16,10 +16,6 @@ describe('<Button />', () => {
     );
   });
 
-  it('should exist', () => {
-    expect(wrapper).toBeDefined();
-  });
-
   it('renders correctly', () => {
     const tree = renderer.create(
       <Button onClick={clickHandler} icon='menu' />

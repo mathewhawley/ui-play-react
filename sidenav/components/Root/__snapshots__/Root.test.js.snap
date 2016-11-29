@@ -11,14 +11,23 @@ exports[`<Root /> renders correctly 1`] = `
   <div
     className="base"
     onClick={[Function]}>
-    <nav
+    <aside
       className="panel">
-      <button
-        className="base material-icons"
-        onClick={[Function]}>
-        close
-      </button>
-    </nav>
+      <header
+        className="header">
+        <h1
+          className="title">
+          Navigation
+        </h1>
+        <button
+          className="base close material-icons"
+          onClick={[Function]}>
+          close
+        </button>
+      </header>
+      <nav
+        className="body" />
+    </aside>
   </div>
 </div>
 `;

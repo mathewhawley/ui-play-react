@@ -29,9 +29,17 @@ class Nav extends Component {
         ref={(node) => this.navEl = node}
         onClick={this.onOutsideClick}
       >
-        <nav className={styles.panel}>
-          <Button icon='close' onClick={this.props.toggle} />
-        </nav>
+        <aside className={styles.panel}>
+          <header className={styles.header}>
+            <h1 className={styles.title}>Navigation</h1>
+            <Button
+              icon='close'
+              onClick={this.props.toggle}
+              customStyles={styles.close}
+            />
+          </header>
+          <nav className={styles.body}></nav>
+        </aside>
       </div>
     );
   }
