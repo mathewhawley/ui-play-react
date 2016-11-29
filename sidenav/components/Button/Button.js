@@ -2,6 +2,11 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import styles from './Button.scss';
 
+const ICONS = [
+  'menu',
+  'close',
+];
+
 const Button = ({
   onClick,
   icon,
@@ -15,7 +20,7 @@ const Button = ({
 
 Button.propTypes = {
   onClick: PropTypes.func.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.oneOf(ICONS).isRequired,
   customStyles: PropTypes.string,
 };
 
