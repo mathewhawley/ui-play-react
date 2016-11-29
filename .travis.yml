@@ -9,6 +9,8 @@ branches:
   only:
     - master
 before_install:
-  npm i -g yarn
+  - npm i -g yarn
 install:
-  yarn
+  - yarn
+after_success:
+  - yarn run test:coverage

@@ -45,7 +45,7 @@
     "lint": "eslint . --cache",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:cover": "jest --coverage",
+    "test:coverage": "jest --coverage",
     "pre-commit-msg": "echo 'Performing pre-commit checks...' && exit 0"
   },
   "pre-commit": [
