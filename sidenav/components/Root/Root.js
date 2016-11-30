@@ -18,23 +18,33 @@ class Root extends Component {
       translateX: 0,
     };
 
-    this.toggleSideNav = this.toggleSideNav.bind(this);
     this.onTouchStart = this.onTouchStart.bind(this);
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
+    this.showSideNav = this.showSideNav.bind(this);
+    this.hideSideNav = this.hideSideNav.bind(this);
+    this.blockClicks = this.blockClicks.bind(this);
     this.reset = this.reset.bind(this);
   }
 
-  toggleSideNav() {
+  showSideNav() {
     this.setState({
-      active: !this.state.active,
-      transitioning: !this.state.transitioning,
+      active: true,
+      transitioning: true,
+      isDragging: false,
+    });
+  }
+
+  hideSideNav() {
+    this.setState({
+      ...this.reset(),
+      transitioning: true,
     });
   }
 
   onTouchStart(event) {
-    if (!this.state.active || event.target !== this.navEl) {
+    if (!this.state.active) {
       return;
     }
 
@@ -49,7 +59,7 @@ class Root extends Component {
   }
 
   onTouchMove(event) {
-    if (!this.state.active || event.target !== this.navEl) {
+    if (!this.state.active) {
       return;
     }
 
@@ -62,20 +72,27 @@ class Root extends Component {
     });
   }
 
-  onTouchEnd(event) {
-    if (!this.state.active || event.target !== this.navEl) {
+  onTouchEnd() {
+    if (!this.state.active) {
       return;
     }
 
     if (Math.abs(this.state.translateX) > 30) {
-      this.setState(this.reset());
-      this.toggleSideNav();
+      this.hideSideNav();
     } else {
-      this.setState({
-        isDragging: false,
-        transitioning: true,
-      });
+      this.showSideNav();
     }
+  }
+
+  onTransitionEnd() {
+    this.setState({
+      ...this.reset(),
+      active: this.state.active,
+    });
+  }
+
+  blockClicks(event) {
+    event.stopPropagation();
   }
 
   reset() {
@@ -89,15 +106,6 @@ class Root extends Component {
     };
   }
 
-  onTransitionEnd() {
-    this.setState({
-      transitioning: false,
-      startX: 0,
-      currentX: 0,
-      translateX: 0,
-    });
-  }
-
   render() {
     const sideNavBaseClasses = classnames({
       [styles.base]: true,
@@ -109,47 +117,51 @@ class Root extends Component {
       [styles.transitioning]: this.state.transitioning,
     });
 
-    const translate = this.state.isDragging
-      ? { transform: `translateX(${this.state.translateX}px)` }
-      : { transform: '' };
+    const translate = {
+      transform: this.state.isDragging ? `translateX(${this.state.translateX}px)` : '',
+    };
 
     return (
       <div>
 
-        <Header toggleSideNav={this.toggleSideNav} />
+        <Header showSideNav={this.showSideNav} />
 
         <div
           className={sideNavBaseClasses}
-          ref={(node) => this.navEl = node}
           onTouchStart={this.onTouchStart}
           onTouchMove={this.onTouchMove}
           onTouchEnd={this.onTouchEnd}
-        >
+          onClick={this.hideSideNav}
+          ref={(node) => this.navEl = node}>
+
           <aside
             className={sideNavPanelClasses}
             onTransitionEnd={this.onTransitionEnd}
-            style={translate}
-          >
+            onClick={this.blockClicks}
+            style={translate}>
+
             <header className={styles.header}>
               <h1 className={styles.title}>Navigation</h1>
               <Button
                 icon='close'
-                onClick={this.toggleSideNav}
-                customStyles={styles.close}
-              />
+                onClick={this.hideSideNav}
+                customStyles={styles.close} />
             </header>
+
             <nav className={styles.body}>
               <ul>
                 {times(6, (index) =>
                   <li key={index}>
-                    <a className={styles.link} href='#'>Euismod Ornare Elit</a>
+                    <a className={styles.link} href='#'>
+                      Euismod Ornare Elit
+                    </a>
                   </li>
                 )}
               </ul>
             </nav>
+
           </aside>
         </div>
-
       </div>
     );
   }

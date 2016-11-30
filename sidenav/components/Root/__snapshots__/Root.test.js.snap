@@ -10,11 +10,13 @@ exports[`<Root /> renders correctly 1`] = `
   </div>
   <div
     className="base"
+    onClick={[Function]}
     onTouchEnd={[Function]}
     onTouchMove={[Function]}
     onTouchStart={[Function]}>
     <aside
       className="panel"
+      onClick={[Function]}
       onTransitionEnd={[Function]}
       style={
         Object {

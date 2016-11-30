@@ -12,12 +12,12 @@ describe('<Header />', () => {
 
   beforeEach(() => {
     spy = jest.fn();
-    wrapper = shallow(<Header toggleSideNav={spy} />);
+    wrapper = shallow(<Header showSideNav={spy} />);
   });
 
   it('renders correctly', () => {
     const tree = renderer.create(
-      <Header toggleSideNav={spy} />
+      <Header showSideNav={spy} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
