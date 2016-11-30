@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import sinon from 'sinon';
 import renderer from 'react-test-renderer';
 import Button from './Button';
 
@@ -10,7 +11,7 @@ describe('<Button />', () => {
   let spy;
 
   beforeEach(() => {
-    spy = jest.fn();
+    spy = sinon.spy();
     wrapper = shallow(
       <Button onClick={spy} icon='menu' />
     );
@@ -25,6 +26,6 @@ describe('<Button />', () => {
 
   it('should call handler on click event', () => {
     wrapper.simulate('click');
-    expect(spy).toHaveBeenCalled();
+    expect(spy.calledOnce).toBe(true);
   });
 });

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import sinon from 'sinon';
 import renderer from 'react-test-renderer';
 import Header from './Header';
 import Button from '../Button';
@@ -11,7 +12,7 @@ describe('<Header />', () => {
   let spy;
 
   beforeEach(() => {
-    spy = jest.fn();
+    spy = sinon.spy();
     wrapper = shallow(<Header showSideNav={spy} />);
   });
 
@@ -24,6 +25,6 @@ describe('<Header />', () => {
 
   it('should call click handler on click', () => {
     wrapper.find(Button).simulate('click');
-    expect(spy).toHaveBeenCalled();
+    expect(spy.calledOnce).toBe(true);
   });
 });
