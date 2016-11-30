@@ -34,9 +34,16 @@ describe('<Nav />', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should not call click handler when panel clicked', () => {
+  it('should not call handler when panel clicked or tapped', () => {
     const target = wrapper.find('nav');
     wrapper.simulate('click', { target });
     expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should have an `active` class when `this.props.active === true`', () => {
+    wrapper.setProps({ active: true });
+    expect(wrapper.hasClass('active')).toBe(true);
+    wrapper.setProps({ active: false });
+    expect(wrapper.hasClass('active')).toBe(false);
   });
 });

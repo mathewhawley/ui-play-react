@@ -31,6 +31,7 @@ class Nav extends Component {
         onTouchEnd={this.onOutsideClick}
       >
         <aside className={styles.panel}>
+
           <header className={styles.header}>
             <h1 className={styles.title}>Navigation</h1>
             <Button
@@ -39,6 +40,7 @@ class Nav extends Component {
               customStyles={styles.close}
             />
           </header>
+
           <nav className={styles.body}>
             <ul>
               {times(6, (index) =>
@@ -48,6 +50,7 @@ class Nav extends Component {
               )}
             </ul>
           </nav>
+
         </aside>
       </div>
     );
