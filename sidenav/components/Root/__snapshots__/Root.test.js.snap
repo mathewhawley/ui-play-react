@@ -10,9 +10,17 @@ exports[`<Root /> renders correctly 1`] = `
   </div>
   <div
     className="base"
-    onTouchEnd={[Function]}>
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}>
     <aside
-      className="panel">
+      className="panel"
+      onTransitionEnd={[Function]}
+      style={
+        Object {
+          "transform": "",
+        }
+      }>
       <header
         className="header">
         <h1

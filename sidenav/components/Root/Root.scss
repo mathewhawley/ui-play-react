@@ -32,7 +32,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   will-change: transform;
   transform: translateX(-102%);
-  transition: transform 250ms ease;
   color: $dark-grey;
 }
 
@@ -88,7 +87,15 @@
     transform: none;
   }
 
+  .panel.transitioning {
+    transition: transform 300ms ease-out;
+  }
+
   &::before {
     opacity: 1;
   }
+}
+
+.panel.transitioning {
+  transition: transform 150ms ease-in;
 }
