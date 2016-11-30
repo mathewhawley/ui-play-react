@@ -3,21 +3,21 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import Nav from './Nav';
+import SideNav from './SideNav';
 import Button from '../Button';
 
-describe('<Nav />', () => {
+describe('<SideNav />', () => {
   let wrapper;
   let spy;
 
   beforeEach(() => {
     spy = jest.fn();
-    wrapper = shallow(<Nav active={false} toggle={spy} />);
+    wrapper = shallow(<SideNav active={false} toggle={spy} />);
   });
 
   it('renders correctly', () => {
     const tree = renderer.create(
-      <Nav active={false} toggle={spy} />
+      <SideNav active={false} toggle={spy} />
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -28,7 +28,7 @@ describe('<Nav />', () => {
   });
 
   it('should call handler on `touchend` event outside the panel', () => {
-    const wrapper = mount(<Nav active={true} toggle={spy} />);
+    const wrapper = mount(<SideNav active={true} toggle={spy} />);
     const target = wrapper.instance().navEl;
     wrapper.simulate('touchend', { target });
     expect(spy).toHaveBeenCalled();

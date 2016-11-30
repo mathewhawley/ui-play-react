@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
 import Header from '../Header';
-import Nav from '../Nav';
+import SideNav from '../SideNav';
 
 class Root extends Component {
   constructor() {
     super();
+
     this.state = {
-      active: false,
+      sideNav: {
+        active: false,
+      },
     };
-    this.toggleNav = this.toggleNav.bind(this);
+
+    this.toggleSideNav = this.toggleSideNav.bind(this);
   }
 
-  toggleNav() {
-    this.setState({ active: !this.state.active });
+  toggleSideNav() {
+    this.setState({
+      sideNav: {
+        active: !this.state.sideNav.active,
+      },
+    });
   }
 
   render() {
     return (
       <div>
-        <Header toggleNav={this.toggleNav} />
-        <Nav {...this.state} toggle={this.toggleNav} />
+        <Header toggleSideNav={this.toggleSideNav} />
+        <SideNav {...this.state.sideNav} toggle={this.toggleSideNav} />
       </div>
     );
   }

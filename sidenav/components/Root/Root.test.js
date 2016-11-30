@@ -18,10 +18,10 @@ describe('<Root />', () => {
   });
 
   it('should toggle active state when handler is called', () => {
-    expect(wrapper.state().active).toBe(false);
-    wrapper.instance().toggleNav();
-    expect(wrapper.state().active).toBe(true);
-    wrapper.instance().toggleNav();
-    expect(wrapper.state().active).toBe(false);
+    expect(wrapper.state().sideNav.active).toBe(false);
+    wrapper.instance().toggleSideNav();
+    expect(wrapper.state().sideNav.active).toBe(true);
+    wrapper.instance().toggleSideNav();
+    expect(wrapper.state().sideNav.active).toBe(false);
   });
 });

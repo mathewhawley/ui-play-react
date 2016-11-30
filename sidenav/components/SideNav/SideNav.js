@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import times from 'lodash/times';
 import Button from '../Button';
-import styles from './Nav.scss';
+import styles from './SideNav.scss';
 
-class Nav extends Component {
+class SideNav extends Component {
   constructor() {
     super();
     this.navEl = null;
@@ -57,9 +57,9 @@ class Nav extends Component {
   }
 }
 
-Nav.propTypes = {
+SideNav.propTypes = {
   toggle: PropTypes.func.isRequired,
   active: PropTypes.bool,
 };
 
-export default Nav;
+export default SideNav;
