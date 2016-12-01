@@ -9,4 +9,4 @@ branches:
   only:
     - master
 after_success:
-  - yarn run test:coverage
+  - yarn test:coverage
