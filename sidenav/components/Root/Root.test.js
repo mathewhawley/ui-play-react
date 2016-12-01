@@ -6,17 +6,15 @@ import sinon from 'sinon';
 import renderer from 'react-test-renderer';
 import Root from './Root';
 
-const mockState = (overrides) => {
-  return {
-    active: false,
-    transitioning: false,
-    isDragging: false,
-    startX: 0,
-    currentX: 0,
-    translateX: 0,
-    ...overrides,
-  };
-};
+const mockState = (overrides) => ({
+  active: false,
+  transitioning: false,
+  isDragging: false,
+  startX: 0,
+  currentX: 0,
+  translateX: 0,
+  ...overrides,
+});
 
 describe('<Root />', () => {
   let wrapper;
@@ -64,5 +62,20 @@ describe('<Root />', () => {
     wrapper.instance().showSideNav();
     wrapper.instance().onTransitionEnd();
     expect(wrapper.state()).toEqual(stateAfter);
+  });
+
+  it('should reset state on `reset()`', () => {
+    const initialState = mockState();
+    wrapper.instance().reset();
+    expect(wrapper.state()).toEqual(initialState);
+  });
+
+  it('should exit early when state is inactive for touch handlers', () => {
+    const initialState = mockState();
+    wrapper.instance().reset();
+    expect(wrapper.instance().onTouchStart()).toBeUndefined();
+    expect(wrapper.instance().onTouchMove()).toBeUndefined();
+    expect(wrapper.instance().onTouchEnd()).toBeUndefined();
+    expect(wrapper.state()).toEqual(initialState);
   });
 });
