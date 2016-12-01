@@ -53,6 +53,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:coverage:watch": "jest --coverage --watch",
     "pre-commit-msg": "echo 'Performing pre-commit checks...' && exit 0"
   },
   "pre-commit": [

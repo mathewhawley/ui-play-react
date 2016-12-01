@@ -29,18 +29,17 @@ class Root extends Component {
   }
 
   showSideNav() {
-    this.setState({
+    this.setState(this.reset({
       active: true,
       transitioning: true,
       isDragging: false,
-    });
+    }));
   }
 
   hideSideNav() {
-    this.setState({
-      ...this.reset(),
+    this.setState(this.reset({
       transitioning: true,
-    });
+    }));
   }
 
   onTouchStart(event) {
@@ -85,17 +84,16 @@ class Root extends Component {
   }
 
   onTransitionEnd() {
-    this.setState({
-      ...this.reset(),
+    this.setState(this.reset({
       active: this.state.active,
-    });
+    }));
   }
 
   blockClicks(event) {
     event.stopPropagation();
   }
 
-  reset() {
+  reset(overrides) {
     return {
       active: false,
       transitioning: false,
@@ -103,6 +101,7 @@ class Root extends Component {
       startX: 0,
       currentX: 0,
       translateX: 0,
+      ...overrides,
     };
   }
 
