@@ -144,7 +144,7 @@ describe('<Root />', () => {
     base.simulate('touchmove', moveEventRight);
     expect(wrapper.state().translateX).toBe(0);
 
-    const moveEventLeft= {
+    const moveEventLeft = {
       touches: [
         { pageX: 20 },
       ],
