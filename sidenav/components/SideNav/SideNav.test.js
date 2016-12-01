@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import renderer from 'react-test-renderer';
-import Root from './Root';
+import SideNav from './SideNav';
 
 const mockState = (overrides) => ({
   active: false,
@@ -22,28 +22,16 @@ const mockTouchEvent = (pageX) => ({
   ],
 });
 
-describe('<Root />', () => {
+describe('<SideNav />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<Root />);
+    wrapper = shallow(<SideNav />);
   });
 
   it('renders correctly', () => {
-    const tree = renderer.create(<Root />).toJSON();
+    const tree = renderer.create(<SideNav />).toJSON();
     expect(tree).toMatchSnapshot();
-  });
-
-  it('should stop click event propagation when panel is clicked', () => {
-    // Event target
-    const panel = wrapper.find('.panel');
-    const spy = sinon.spy();
-
-    // Simulate event
-    panel.simulate('click', { stopPropagation: spy });
-
-    // Assert spy has been called
-    expect(spy.calledOnce).toBe(true);
   });
 
   it('should correctly update the state on `showSideNav()`', () => {
@@ -56,52 +44,55 @@ describe('<Root />', () => {
 
     // Call method
     wrapper.instance().showSideNav();
-
     // Assert
     expect(wrapper.state()).toEqual(expectedState);
   });
 
   it('should correctly update the state on `hideSideNav()`', () => {
+    // Create expected state object
     const expectedState = mockState({
       active: false,
       transitioning: true,
       isDragging: false,
     });
+
+    // Call method
     wrapper.instance().hideSideNav();
+    // Assert
     expect(wrapper.state()).toEqual(expectedState);
+  });
+
+  it('should return initial state on `reset()`', () => {
+    expect(wrapper.state()).toEqual(wrapper.instance().reset());
   });
 
   it('should correctly update the state on `onTransitionEnd()`', () => {
-    // Create expected state object
-    const expectedState = mockState({
-      active: true,
-    });
+    // Create expected state objects
+    const expectedActiveState = mockState({ active: true });
+    const expectedInactiveState = mockState();
 
-    // Set panel state to 'active'
+    // Set to 'active'
     wrapper.instance().showSideNav();
     wrapper.instance().onTransitionEnd();
-
     // Assert state is as expected
-    expect(wrapper.state()).toEqual(expectedState);
+    expect(wrapper.state()).toEqual(expectedActiveState);
+
+    // Set to 'inactive'
+    wrapper.instance().hideSideNav();
+    wrapper.instance().onTransitionEnd();
+    // Assert state is as expected
+    expect(wrapper.state()).toEqual(expectedInactiveState);
   });
 
-  it('should reset state on `reset()`', () => {
-    const initialState = mockState();
-    wrapper.instance().reset();
-    expect(wrapper.state()).toEqual(initialState);
-  });
+  it('should stop event propagation when panel is clicked', () => {
+    // Event target
+    const panel = wrapper.find('.panel');
+    const spy = sinon.spy();
 
-  it('should exit early when state is inactive for touch handlers', () => {
-    // Create expected state object
-    const initialState = mockState();
-
-    // Call methods, assert on the resulting state and return values
-    expect(wrapper.instance().onTouchStart()).toBeUndefined();
-    expect(wrapper.state()).toEqual(initialState);
-    expect(wrapper.instance().onTouchMove()).toBeUndefined();
-    expect(wrapper.state()).toEqual(initialState);
-    expect(wrapper.instance().onTouchEnd()).toBeUndefined();
-    expect(wrapper.state()).toEqual(initialState);
+    // Simulate event
+    panel.simulate('click', { stopPropagation: spy });
+    // Assert spy has been called
+    expect(spy.calledOnce).toBe(true);
   });
 
   describe('touch event handlers', () => {
@@ -111,6 +102,27 @@ describe('<Root />', () => {
       base = wrapper.find('.base');
       wrapper.instance().showSideNav();
       wrapper.instance().onTransitionEnd();
+    });
+
+    afterEach(() => {
+      wrapper.instance().hideSideNav();
+      wrapper.instance().onTransitionEnd();
+    });
+
+    it('should exit early when state is inactive for touch handlers', () => {
+      // Use local component wrapper
+      const wrapper = shallow(<SideNav />);
+      // Create expected state object
+      const initialState = mockState();
+      const event = mockTouchEvent(1);
+
+      // Call methods, assert on the resulting state and return values
+      expect(wrapper.instance().onTouchStart(event)).toBeUndefined();
+      expect(wrapper.state()).toEqual(initialState);
+      expect(wrapper.instance().onTouchMove(event)).toBeUndefined();
+      expect(wrapper.state()).toEqual(initialState);
+      expect(wrapper.instance().onTouchEnd()).toBeUndefined();
+      expect(wrapper.state()).toEqual(initialState);
     });
 
     it('should update the state correctly on `touchstart`', () => {
@@ -126,7 +138,6 @@ describe('<Root />', () => {
 
       // Simulate event
       base.simulate('touchstart', event);
-
       // Assert
       expect(wrapper.state()).toEqual(expectedState);
     });
@@ -147,63 +158,60 @@ describe('<Root />', () => {
       // Simulate events
       base.simulate('touchstart', startEvent);
       base.simulate('touchmove', moveEvent);
-
       // Assert
       expect(wrapper.state()).toEqual(expectedState);
     });
 
     it('should not move further than 0 on `touchmove`', () => {
+      // Movement values
+      const start = 100;
+      const move = 1;
       // Set up mock events
-      const startEvent = mockTouchEvent(50);
-      const moveEventRight = mockTouchEvent(400);
+      const startEvent = mockTouchEvent(start);
+      const moveEventRight = mockTouchEvent(start + move);
+      const moveEventLeft = mockTouchEvent(start - move);
 
-      // Simulate events
+      // Simulate move right event
       base.simulate('touchstart', startEvent);
       base.simulate('touchmove', moveEventRight);
-
       // Assert
       expect(wrapper.state().translateX).toBe(0);
 
-      // Touch event to left of 'start'
-      const moveEventLeft = mockTouchEvent(20);
-
-      // Simulate event with new object
+      // Simulate move left event
       base.simulate('touchmove', moveEventLeft);
-
       // Assert
-      expect(wrapper.state().translateX).toBe(-30);
+      expect(wrapper.state().translateX).toBe(-1);
     });
 
     it('should not hide sidenav if `translateX` is below threshold', () => {
+      const threshold = 30;
+      const start = 100;
+      const move = start - threshold;
+
       // Set up mock events and expected state
-      const startEvent = mockTouchEvent(300);
-      const moveEventSmall = mockTouchEvent(280);
+      const startEvent = mockTouchEvent(start);
+      const moveEventLessThan = mockTouchEvent(move);
+      const moveEventGreaterThan = mockTouchEvent(move - 1);
       const expectedState = mockState({
         active: true,
         isDragging: false,
         transitioning: true,
       });
-
-      // Simulate events
-      base.simulate('touchstart', startEvent);
-      base.simulate('touchmove', moveEventSmall);
-      base.simulate('touchend');
-
-      // Assert not dismissed
-      expect(wrapper.state()).toEqual(expectedState);
-
-      // Set up mock event (move greater than threshold)
-      // and expected state
-      const moveEventLarge = mockTouchEvent(200);
       const expectedStateDismiss = mockState({
         transitioning: true,
       });
 
       // Simulate events
       base.simulate('touchstart', startEvent);
-      base.simulate('touchmove', moveEventLarge);
+      base.simulate('touchmove', moveEventLessThan);
       base.simulate('touchend');
+      // Assert not dismissed
+      expect(wrapper.state()).toEqual(expectedState);
 
+      // Simulate events
+      base.simulate('touchstart', startEvent);
+      base.simulate('touchmove', moveEventGreaterThan);
+      base.simulate('touchend');
       // Assert dismissed
       expect(wrapper.state()).toEqual(expectedStateDismiss);
     });

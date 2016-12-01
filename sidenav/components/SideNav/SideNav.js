@@ -3,9 +3,9 @@ import classnames from 'classnames';
 import times from 'lodash/times';
 import Button from '../Button';
 import Header from '../Header';
-import styles from './Root.scss';
+import styles from './SideNav.scss';
 
-class Root extends Component {
+class SideNav extends Component {
   constructor() {
     super();
 
@@ -18,14 +18,16 @@ class Root extends Component {
       translateX: 0,
     };
 
+    this.showSideNav = this.showSideNav.bind(this);
+    this.hideSideNav = this.hideSideNav.bind(this);
+    this.reset = this.reset.bind(this);
+
+    // Event handlers
     this.onTouchStart = this.onTouchStart.bind(this);
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
-    this.showSideNav = this.showSideNav.bind(this);
-    this.hideSideNav = this.hideSideNav.bind(this);
     this.blockClicks = this.blockClicks.bind(this);
-    this.reset = this.reset.bind(this);
   }
 
   showSideNav() {
@@ -40,6 +42,18 @@ class Root extends Component {
     this.setState(this.reset({
       transitioning: true,
     }));
+  }
+
+  reset(overrides) {
+    return {
+      active: false,
+      transitioning: false,
+      isDragging: false,
+      startX: 0,
+      currentX: 0,
+      translateX: 0,
+      ...overrides,
+    };
   }
 
   onTouchStart(event) {
@@ -91,18 +105,6 @@ class Root extends Component {
 
   blockClicks(event) {
     event.stopPropagation();
-  }
-
-  reset(overrides) {
-    return {
-      active: false,
-      transitioning: false,
-      isDragging: false,
-      startX: 0,
-      currentX: 0,
-      translateX: 0,
-      ...overrides,
-    };
   }
 
   render() {
@@ -165,4 +167,4 @@ class Root extends Component {
   }
 }
 
-export default Root;
+export default SideNav;

@@ -1,4 +1,4 @@
-exports[`<Root /> renders correctly 1`] = `
+exports[`<SideNav /> renders correctly 1`] = `
 <div>
   <div
     className="base">
