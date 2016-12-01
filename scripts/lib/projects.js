@@ -1,1 +1,3 @@
-module.exports = new Set(['sidenav']);
+module.exports = new Set([
+  'sidenav',
+]);

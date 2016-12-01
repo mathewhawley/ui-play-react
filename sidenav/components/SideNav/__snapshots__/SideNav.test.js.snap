@@ -1,0 +1,88 @@
+exports[`<SideNav /> renders correctly 1`] = `
+<div>
+  <div
+    className="base">
+    <button
+      className="base button material-icons"
+      onClick={[Function]}>
+      menu
+    </button>
+  </div>
+  <div
+    className="base"
+    onClick={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}>
+    <aside
+      className="panel"
+      onClick={[Function]}
+      onTransitionEnd={[Function]}
+      style={
+        Object {
+          "transform": "",
+        }
+      }>
+      <header
+        className="header">
+        <h1
+          className="title">
+          Navigation
+        </h1>
+        <button
+          className="base close material-icons"
+          onClick={[Function]}>
+          close
+        </button>
+      </header>
+      <nav
+        className="body">
+        <ul>
+          <li>
+            <a
+              className="link"
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              className="link"
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              className="link"
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              className="link"
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              className="link"
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+          <li>
+            <a
+              className="link"
+              href="#">
+              Euismod Ornare Elit
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+  </div>
+</div>
+`;

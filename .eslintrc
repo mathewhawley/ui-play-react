@@ -123,7 +123,6 @@
     "no-proto": 2,
     "no-redeclare": 2,
     "no-regex-spaces": 2,
-    "no-return-assign": 1,
     "no-self-assign": 2,
     "no-sparse-arrays": 2,
     "no-tabs": 1,

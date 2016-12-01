@@ -1,0 +1,101 @@
+@import '../../styles/variables';
+
+.base {
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+
+  &::before {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    transition: opacity 150ms ease;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  &,
+  &::before {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.panel {
+  background-color: $white;
+  width: 90%;
+  max-width: 350px;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  will-change: transform;
+  transform: translateX(-102%);
+  color: $dark-grey;
+}
+
+.header {
+  height: 20vh;
+  max-height: 200px;
+  min-height: 150px;
+  background-color: $dark-grey;
+  padding: $global-padding;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.body {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.link {
+  display: block;
+  padding: $global-padding;
+  border-bottom: 1px solid $mid-grey;
+
+  &:hover {
+    background-color: $mid-grey;
+  }
+}
+
+.close {
+  color: $white;
+  align-self: flex-start;
+  margin-top: #{($global-padding - 6) * -1};
+  margin-left: #{($global-padding - 6) * -1};
+  order: -1;
+}
+
+/*
+ * States
+ * ========================================== */
+
+.base.active {
+  pointer-events: auto;
+
+  .panel {
+    transform: none;
+  }
+
+  .panel.transitioning {
+    transition: transform 300ms ease-out;
+  }
+
+  &::before {
+    opacity: 1;
+  }
+}
+
+.panel.transitioning {
+  transition: transform 150ms ease-in;
+}

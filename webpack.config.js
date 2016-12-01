@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -44,6 +45,7 @@ module.exports = {
       minChunks: Infinity,
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new StyleLintPlugin(),
   ],
   resolve: {
     extensions: ['', '.js', '.scss'],

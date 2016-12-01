@@ -44,25 +44,22 @@ config.resolve.root = filePath;
 const compiler = webpack(config);
 
 compiler.plugin('compile', () => {
-  console.log();
   spinner = ora('Bundling...').start();
 });
 
 compiler.plugin('failed', () => {
   spinner.text = chalk.red('Bundle failed!');
   spinner.fail();
-  console.log();
 });
 
 compiler.plugin('done', () => {
-  spinner.text = chalk.green('Bundle complete!');
+  spinner.text = chalk.green('Bundle complete!\n');
   spinner.succeed();
-  console.log();
 
   if (server) {
     server.listen(port, host, () => {
-      console.log();
-      console.log(`Server is listening at http://${host}:${port}...`);
+      const URL = chalk.green(`http://${host}:${port}`);
+      console.log(`\nServer is listening at ${URL} ...`);
     });
   }
 });

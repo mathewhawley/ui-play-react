@@ -1,0 +1,14 @@
+@import '../../styles/variables';
+
+.base {
+  background-color: $dark-grey;
+  height: 60px;
+  padding: 0 $global-padding;
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  color: $white;
+  margin-left: -#{$global-padding - 10px};
+}
