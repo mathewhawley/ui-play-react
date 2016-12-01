@@ -131,8 +131,7 @@ class Root extends Component {
           onTouchStart={this.onTouchStart}
           onTouchMove={this.onTouchMove}
           onTouchEnd={this.onTouchEnd}
-          onClick={this.hideSideNav}
-          ref={(node) => this.sideNavEl = node}>
+          onClick={this.hideSideNav}>
 
           <aside
             className={sideNavPanelClasses}
