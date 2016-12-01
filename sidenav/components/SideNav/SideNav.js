@@ -68,6 +68,7 @@ class SideNav extends Component {
       startX,
       currentX,
       isDragging: true,
+      transitioning: false,
     });
   }
 
