@@ -69,9 +69,7 @@ describe('hideSideNav', () => {
 
   it('should correctly update the state', () => {
     const expectedState = mockState({
-      active: false,
       transitioning: true,
-      isDragging: false,
     });
 
     expect(wrapper.state()).toEqual(expectedState);
@@ -276,28 +274,23 @@ describe('onTouchEnd', () => {
     const start = 100;
     const move = start - threshold;
 
+    const showSideNav = sinon.spy(wrapper.instance(), 'showSideNav');
+    const hideSideNav = sinon.spy(wrapper.instance(), 'hideSideNav');
+
     const startEvent = mockTouchEvent(start);
     const moveEventLessThan = mockTouchEvent(move);
     const moveEventGreaterThan = mockTouchEvent(move - 1);
-    const expectedState = mockState({
-      active: true,
-      isDragging: false,
-      transitioning: true,
-    });
-    const expectedStateDismiss = mockState({
-      transitioning: true,
-    });
 
     sideNavEl.simulate('touchstart', startEvent);
     sideNavEl.simulate('touchmove', moveEventLessThan);
     sideNavEl.simulate('touchend');
 
-    expect(wrapper.state()).toEqual(expectedState);
+    expect(showSideNav.calledOnce).toBe(true);
 
     sideNavEl.simulate('touchstart', startEvent);
     sideNavEl.simulate('touchmove', moveEventGreaterThan);
     sideNavEl.simulate('touchend');
 
-    expect(wrapper.state()).toEqual(expectedStateDismiss);
+    expect(hideSideNav.calledOnce).toBe(true);
   });
 });
