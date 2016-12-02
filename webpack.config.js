@@ -1,10 +1,13 @@
 const webpack = require('webpack');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const pkg = require('./package.json');
 
 module.exports = {
   entry: {
     bundle: ['./index.js'],
-    vendor: ['react', 'react-dom'],
+    vendor: Object.keys(pkg.dependencies).filter((dep) => {
+      return !['babel-runtime', 'lodash'].includes(dep);
+    }),
   },
   output: {
     filename: '[name].[hash].js',

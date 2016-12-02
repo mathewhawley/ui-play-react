@@ -27,7 +27,7 @@ const filePath = path.resolve(process.cwd(), process.argv[2]);
 config.context = filePath;
 config.entry.bundle = [
   `webpack-dev-server/client?http://${host}:${port}/`,
-  'webpack/hot/dev-server',
+  'webpack/hot/only-dev-server',
   ...config.entry.bundle,
 ];
 config.output.path = filePath;
