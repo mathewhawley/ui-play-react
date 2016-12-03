@@ -34,7 +34,6 @@ class SideNav extends Component {
     this.setState(this.reset({
       active: true,
       transitioning: true,
-      isDragging: false,
     }));
   }
 

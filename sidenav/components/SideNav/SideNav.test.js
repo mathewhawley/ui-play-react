@@ -41,7 +41,6 @@ describe('showSideNav', () => {
     const expectedState = mockState({
       active: true,
       transitioning: true,
-      isDragging: false,
     });
     expect(wrapper.state()).toEqual(expectedState);
   });
@@ -98,16 +97,18 @@ describe('reset', () => {
 
 describe('onTransitionEnd', () => {
   let wrapper;
+  let instance;
 
   beforeEach(() => {
     wrapper = shallow(<SideNav />);
+    instance = wrapper.instance();
   });
 
   it('should correctly update the state after `show` transition', () => {
     const expectedActiveState = mockState({ active: true });
 
-    wrapper.instance().showSideNav();
-    wrapper.instance().onTransitionEnd();
+    instance.showSideNav();
+    instance.onTransitionEnd();
 
     expect(wrapper.state()).toEqual(expectedActiveState);
   });
@@ -115,8 +116,8 @@ describe('onTransitionEnd', () => {
   it('should correctly update the state after `hide` transition', () => {
     const expectedInactiveState = mockState();
 
-    wrapper.instance().hideSideNav();
-    wrapper.instance().onTransitionEnd();
+    instance.hideSideNav();
+    instance.onTransitionEnd();
 
     expect(wrapper.state()).toEqual(expectedInactiveState);
   });
@@ -163,15 +164,17 @@ describe('blockClicks', () => {
 
 describe('onTouchStart', () => {
   let wrapper;
+  let instance;
 
   beforeEach(() => {
     wrapper = shallow(<SideNav />);
+    instance = wrapper.instance();
   });
 
   it('should return early if `active === false`', () => {
     const expectedState = mockState();
 
-    expect(wrapper.instance().onTouchStart()).toBeUndefined();
+    expect(instance.onTouchStart()).toBeUndefined();
     expect(wrapper.state()).toEqual(expectedState);
   });
 
@@ -186,8 +189,8 @@ describe('onTouchStart', () => {
       transitioning: false,
     });
 
-    wrapper.instance().showSideNav();
-    wrapper.instance().onTransitionEnd();
+    instance.showSideNav();
+    instance.onTransitionEnd();
 
     sideNavEl.simulate('touchstart', event);
 
