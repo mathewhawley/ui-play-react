@@ -108,18 +108,25 @@ class SideNav extends Component {
   }
 
   render() {
+    const {
+      active,
+      transitioning,
+      translateX,
+      isDragging,
+    } = this.state;
+
     const sideNavBaseClasses = classnames({
       [styles.base]: true,
-      [styles.active]: this.state.active,
+      [styles.active]: active,
     });
 
     const sideNavPanelClasses = classnames({
       [styles.panel]: true,
-      [styles.transitioning]: this.state.transitioning,
+      [styles.transitioning]: transitioning,
     });
 
     const translate = {
-      transform: this.state.isDragging ? `translateX(${this.state.translateX}px)` : '',
+      transform: isDragging ? `translateX(${translateX}px)` : '',
     };
 
     return (
