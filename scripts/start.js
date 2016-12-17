@@ -4,15 +4,14 @@ const path = require('path');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const wpConfig = require('../webpack.config');
+const config = require('./config');
 const chalk = require('chalk');
 const ora = require('ora');
-const projects = require('./lib/projects');
-const config = require('../webpack.config');
 
 let spinner;
 let server = null;
-const port = 8080;
-const host = 'localhost';
+const { port, host, projects } = config;
 
 if (!process.argv[2]) {
   console.log(chalk.red('✖ No argument provided'));
@@ -24,24 +23,24 @@ if (!process.argv[2]) {
 
 const filePath = path.resolve(process.cwd(), process.argv[2]);
 
-config.context = filePath;
-config.entry.bundle = [
+wpConfig.context = filePath;
+wpConfig.entry.bundle = [
   `webpack-dev-server/client?http://${host}:${port}/`,
   'webpack/hot/only-dev-server',
-  ...config.entry.bundle,
+  ...wpConfig.entry.bundle,
 ];
-config.output.path = filePath;
-config.plugins = [
-  ...config.plugins,
+wpConfig.output.path = filePath;
+wpConfig.plugins = [
+  ...wpConfig.plugins,
   new webpack.HotModuleReplacementPlugin(),
   new HtmlWebpackPlugin({
     template: path.join(filePath, 'index.html'),
     inject: 'body',
   }),
 ];
-config.resolve.root = filePath;
+wpConfig.resolve.root = filePath;
 
-const compiler = webpack(config);
+const compiler = webpack(wpConfig);
 
 compiler.plugin('compile', () => {
   spinner = ora('Bundling...').start();
