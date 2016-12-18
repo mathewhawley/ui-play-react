@@ -14,9 +14,9 @@ let server = null;
 const { port, host, projects } = config;
 
 if (!process.argv[2]) {
-  throw new Error('No argument provided')
+  throw new Error('No argument provided');
 } else if (!projects.has(process.argv[2])) {
-  throw new Error(`'${process.argv[2]}' is not an existing project`)
+  throw new Error(`'${process.argv[2]}' is not an existing project`);
 }
 
 const filePath = path.resolve(process.cwd(), process.argv[2]);
